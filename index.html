@@ -97,6 +97,7 @@
     const installBtn = document.getElementById('install-btn');
 
     let currentMode = 'word-study';
+    let currentRoundLabel = '';
     let allWords = [];
     let practiceWords = [];
 
@@ -206,6 +207,8 @@
             return;
         }
 
+        currentRoundLabel = `단어공부 ${selectedRound}회차`;
+
         // 40개 단어 랜덤 섞기
         currentQuizWords = shuffle([...targetWords]);
         currentIndex = 0;
@@ -227,6 +230,8 @@
             alert('해당 회차에 단어가 없습니다.');
             return;
         }
+
+        currentRoundLabel = `실전voca ${selectedSession}회차`;
 
         currentQuizWords = shuffle([...targetWords]);
         currentIndex = 0;
@@ -284,7 +289,8 @@
         const wrongCount = wrongAnswers.length;
         const correctCount = total - wrongCount;
 
-        resultScore.innerHTML = `총 ${total}문제 중 <strong>${correctCount}개</strong> 맞춤<br>
+        resultScore.innerHTML = `<strong>${currentRoundLabel}</strong><br>
+                    총 ${total}문제 중 <strong>${correctCount}개</strong> 맞춤<br>
                                 <span style="color: #e74c3c;">(틀린 개수: ${wrongCount}개)</span>`;
 
         wrongContainer.innerHTML = '';
